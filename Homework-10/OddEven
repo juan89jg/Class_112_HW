@@ -1,0 +1,87 @@
+import java.util.Scanner;
+public class OddEven 
+{
+	int RandomNumber;
+	int computerNumber;
+	int lownumber;
+	int highnumber;
+	int GameCount;
+	int GameWins;
+	int GameLose;
+	String Guess;
+	String ComputerResult;
+	String Play;
+	String KeepPlaying;
+	boolean keepPlaying =true;
+	boolean KeepGoing = true;
+	Scanner input = new Scanner(System.in);
+	public OddEven(int low, int high)
+	{
+		lownumber = low;
+		highnumber = high;
+	}
+	public void displayMessage()
+	{
+		System.out.println("Welcome to the Odd / Even Game");
+		
+	}
+	public void playGame()
+	{
+		
+		while(KeepGoing)
+		{
+			RandomNumber =  lownumber + (int)(Math.random() *(highnumber- lownumber));
+			computerNumber = RandomNumber % 2;
+			if (computerNumber == 1)
+			{
+				ComputerResult = "ODD";
+			}
+			else if (computerNumber == 0)
+			{
+				ComputerResult = "EVEN";
+			}
+			System.out.println("Please Guess Odd or Even: ");
+			Guess = input.next();
+			if(Guess.toUpperCase().equals(ComputerResult))
+			{
+				System.out.printf("You won\nYou Guessed %s\ncomputer number was %d\n\n", Guess, RandomNumber);
+				++GameCount;
+				++GameWins;
+			}
+			else
+			{
+				System.out.printf("You Lost\nYou Guessed %s\nComputer number was %d\n\n", Guess, RandomNumber);
+				++GameCount;
+				++GameLose;
+			}
+			System.out.printf("Would you like to continue within the range %d and %d?\n",lownumber, highnumber);
+			KeepPlaying = input.next();
+			if(KeepPlaying.toUpperCase().startsWith("N"))
+			{
+				KeepGoing = false;
+			}
+		}//End while loop
+	}//End Game method
+	public void displayResults()
+	{
+		System.out.printf("Here are your results\nGames Played %d\nGames Won %d\nGames Lost %d\nThanks for playing\n", GameCount, GameWins, GameLose);
+	}
+	public boolean keepPlaying()
+	{
+		System.out.println("\n\nWould you like to keep Playing?\nType yes or no:");
+		KeepPlaying = input.next();
+		if (KeepPlaying.toUpperCase().startsWith("Y"))
+		{
+			keepPlaying = true;
+		}
+		else
+		{
+			keepPlaying = false;
+		}
+		return keepPlaying;
+	}
+	public boolean GetKeepPlaying()
+	{
+		return keepPlaying;
+	}
+}//End Class
